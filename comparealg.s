@@ -8,6 +8,7 @@
 .equ RCC_AHB1ENR, 0x30
 .equ GPIO_MODER, 0x00
 .equ GPIO_ODR, 0x14
+.equ LIST_LENGTH 10
 
 // Bit Field Definitions for Pin PI0
 .equ RCC_GPIOIEN, (1 << 8)
@@ -44,8 +45,8 @@ compare_LED2:
 	ORR R1, R1, #GPIOI_PIN2_OUT // Set to Output mode
 	STR R1, [R0, #GPIO_MODER]
 
-	// 4.
-
+	// 4. Algorithm to determine largest number
+	ADDS R0, R0, #0 // Reset the value of R0.
 
 	// 4. Perform value retrievals from target spaces
 	LDR R2, =SRAM_NUMBER
