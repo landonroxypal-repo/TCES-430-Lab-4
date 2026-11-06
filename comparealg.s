@@ -44,6 +44,9 @@ compare_LED2:
 	ORR R1, R1, #GPIOI_PIN2_OUT // Set to Output mode
 	STR R1, [R0, #GPIO_MODER]
 
+	// 4.
+
+
 	// 4. Perform value retrievals from target spaces
 	LDR R2, =SRAM_NUMBER
 	LDR R2, [R2] // Extract SRAM value into R2
@@ -60,6 +63,21 @@ RED_LED_ON:
 	STR R1, [R0, #GPIO_ODR]
 	BX LR // Return execution context to caller
 
+YELLOW_LED_ON:
+	LDR R1, [R0, #GPIO_ODR]
+	ORR R1, R1, #GPIOI_PIN0_ON
+	STR R1, [R0, #GPIO_ODR]
+	BX LR // Return execution context to caller
+
 .align 2
 FLASH_NUMBERS:
-	.word 0x00000042 // Code memory threshold reference value (66)
+	.word 0x0CD9BC16 // (215596054)
+	.word 0xE979B702 // (-377899262)
+	.word 0x5429E69C // (1412032156)
+	.word 0xF8252A94 // (-131781996)
+	.word 0xA482B0D9 // (-1534938919)
+	.word 0x60B2D023 // (1622331427)
+	.word 0x2B1E6F8A // (867451303)
+	.word 0xD4448D67 // (-733704857)
+	.word 0xE285FB4A // (-494535862)
+	.word 0x2B1E6F8A // (723414922)
