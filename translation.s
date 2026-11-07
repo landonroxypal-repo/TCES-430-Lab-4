@@ -2,8 +2,8 @@
 .cpu cortex-m7
 .thumb
 
-.equ a, 5
-.equ b, 5
+.equ a, -12
+.equ b, -2
 
 .section .text
 .global translation
@@ -30,7 +30,7 @@ while_loop:
 	BLE loop_end
 
 	ADD R0, R0, R4 // i = i + a
-	LDR R3, #2 // Load immediate value of 2
+	LDR R3, =2 // Load immediate value of 2
 	MUL R3, R1, R3 // calculate 2 * j
 	SUB R0, R0, R3 // i = i + a - 2 * j
 
