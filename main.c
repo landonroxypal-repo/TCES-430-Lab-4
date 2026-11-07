@@ -28,12 +28,12 @@
 // translation(void) -> Translation of C-Code to assembly code (Lab part 2)
 
 
-extern void compare_LED2(void);
+extern void translation(void);
 
 int main(void)
 {
 	// Branch control over to native ARM assembly space
-	compare_LED2();
+	translation();
 
 	// Trapping loop to hold system state indefinitely
 	while (1) {
