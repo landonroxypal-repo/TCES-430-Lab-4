@@ -13,10 +13,10 @@
 // Bit Field Definitions for Pin PI0
 .equ RCC_GPIOIEN, (1 << 8)
 
-.equ GPIOI_PIN0_OUT, (1 << 2 * 0) // Sets Pin 0 to Output (01 in bits 1:0)
-.equ GPIOI_PIN0_ON, (1 << 0) // Sets Pin 0 High
+.equ GPIOI_PIN0_OUT, (1) // Sets Pin 0 to Output (01 in bits 1:0)
+.equ GPIOI_PIN0_ON, (1) // Sets Pin 0 High
 
-.equ GPIOI_PIN2_OUT, (1 << 2 * 2 + 1) // Sets Pin 2 to Output (01 in bits 5:4)
+.equ GPIOI_PIN2_OUT, (1 << (2 * 2)) // Sets Pin 2 to Output (01 in bits 5:4)
 .equ GPIOI_PIN2_ON, (1 << 2) // Sets Pin 2 High
 
 .section .text
@@ -31,7 +31,7 @@ compare_LED2:
 	ORR R1, R1, #RCC_GPIOIEN
 	STR R1, [R0, #RCC_AHB1ENR]
 
-	// 2. Configure Pin PI0 (External Red LED, D13) as Output
+	// 2. Configure Pin PI0 (External Red LED, D10) as Output
 	LDR R0, =GPIOI_BASE
 	LDR R1, [R0, #GPIO_MODER]
 	BIC R1, R1, #(3 << 2 * 0) // Clear bits 1:0
@@ -52,7 +52,7 @@ compare_LED2:
 	// Let R3 be the value of the current address in the array.
 	// Let R4 be the value of the current largest integer in the array.
 
-	ADDS R0, R0, #0 // Reset the value of R0.
+	MOV R0, #0  // Reset the value of R0.
 
 	LDR R2, =FLASH_NUMBERS
 	ADD R1, R2, #0 // Load current address into R1.
@@ -80,22 +80,19 @@ FOR_LOOP:	// Loop
 	ADD R0, R0, #1 // Increment counter
 	ADD R1, R1, #4 // Increment address
 
-	// 5. Condition evaluations
-	CMP R3, R4
-	IT LT
-	ADDLT R2, R1, #0
-
-	CMP R0, #0
+	CMP R0, #ARRAY_LENGTH
 	IT LT
 	BLT FOR_LOOP
 
 
 // Loop exit
 
+// Reload GPIOI offset
+LDR R0, =GPIOI_BASE
 // Load largest value from memory
-LDR R0, [R2]
+LDR R1, [R2]
 
-CMP R0, #0
+CMP R1, #0
 IT LT
 BLT YELLOW_LED_ON
 
@@ -120,7 +117,7 @@ FLASH_NUMBERS:
 	.word 0x5429E69C // (1412032156)
 	.word 0xF8252A94 // (-131781996)
 	.word 0xA482B0D9 // (-1534938919)
-	.word 0x60B2D023 // (1622331427)
+	.word 0x60B2D023 // (1622331427 = 0x60B2D023, -1622331427 = 0x9F4D2FDD)
 	.word 0x2B1E6F8A // (867451303)
 	.word 0xD4448D67 // (-733704857)
 	.word 0xE285FB4A // (-494535862)
