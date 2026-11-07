@@ -30,10 +30,53 @@
 
 extern void translation(void);
 
+void translate_test(void) {
+	int8_t i = 1;
+	int8_t j = 0;
+	int8_t k = -1;
+
+	int8_t a = -12;
+	int8_t b = -2;
+
+	while (i > j) {
+		i = i + a - (2 * j);
+
+		if (j >= k) {
+			i = i + 2;
+			k = k - b + (2 * j);
+		}
+
+		j++;
+	}
+}
+
+// Test cases for translate:
+// Case 1: a = b
+//     a = 5
+//     b = 5
+//
+//     i = 1
+//     j = 8
+//     k = 15
+// Case 2: a > b
+//     a = 5
+//     b = -12
+//
+//     i = 3
+//     j = 6
+//     k = 11
+// Case 3: a < b
+//     a = -12
+//     b = -2
+//
+//     i = -9
+//     j = 1
+//     k = 1
+
 int main(void)
 {
 	// Branch control over to native ARM assembly space
-	translation();
+	translate_test();
 
 	// Trapping loop to hold system state indefinitely
 	while (1) {
