@@ -31,14 +31,14 @@ compare_LED2:
 	ORR R1, R1, #RCC_GPIOIEN
 	STR R1, [R0, #RCC_AHB1ENR]
 
-	// 2. Configure Pin PI0 (External Red LED, D10) as Output
+	// 2. Configure Pin PI0 (External Red LED, D8) as Output
 	LDR R0, =GPIOI_BASE
 	LDR R1, [R0, #GPIO_MODER]
 	BIC R1, R1, #(3 << 2 * 0) // Clear bits 1:0
 	ORR R1, R1, #GPIOI_PIN0_OUT // Set to Output mode
 	STR R1, [R0, #GPIO_MODER]
 
-	// 3. Configure Pin PI2 (Internal Yellow LED, D8) as Output
+	// 3. Configure Pin PI2 (External Yellow LED, D5) as Output
 	LDR R0, =GPIOI_BASE
 	LDR R1, [R0, #GPIO_MODER]
 	BIC R1, R1, #(3 << 2 * 2) // Clear bits 5:4
