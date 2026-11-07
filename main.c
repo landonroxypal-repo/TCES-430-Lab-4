@@ -79,7 +79,7 @@ void translate_test(void) {
 int main(void)
 {
 	// Branch control over to native ARM assembly space
-	translate();
+	translation();
 
 	// Trapping loop to hold system state indefinitely
 	while (1) {
