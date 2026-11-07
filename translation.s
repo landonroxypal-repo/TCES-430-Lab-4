@@ -2,8 +2,19 @@
 .cpu cortex-m7
 .thumb
 
-.equ a, -12
-.equ b, -2
+// Set values to what you want for a and b
+.equ a, 5
+.equ b, 5
+
+.section .data
+.align 2
+
+I:
+	.word 1
+J:
+	.word 0
+K:
+	.word -1
 
 .section .text
 .global translation
@@ -17,9 +28,17 @@ translation:
 // Let R4 be a
 // Let R5 be b
 
-MOV R0, #1
-MOV R1, #0
-MOV R2, #-1
+// Load initial value of I
+LDR R0, =I
+LDR R0, [R0]
+
+// Load initial value of J
+LDR R1, =J
+LDR R1, [R1]
+
+// Load initial value of K
+LDR R2, =K
+LDR R2, [R2]
 
 MOV R4, #a
 MOV R5, #b
@@ -49,5 +68,16 @@ if_statement_end:
 	B while_loop
 
 loop_end:
+
+// Store value of I to memory
+LDR R4, =I
+STR R0, [R4]
+// Store value of J to memory
+LDR R4, =J
+STR R1, [R4]
+// Store value of K to memory
+LDR R4, =K
+STR R2, [R4]
+
 BX LR // Return control to caller
 
