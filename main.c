@@ -27,8 +27,11 @@
 // compare_LED2(void) -> Text-based LED comparison with an array (Lab part 1)
 // translation(void) -> Translation of C-Code to assembly code (Lab part 2)
 
+// Call the method you want to run below in main().
 
 extern void translation(void);
+extern void compare_LED(void);
+extern void compare_LED2(void);
 
 void translate_test(void) {
 	int8_t i = 1;
@@ -76,7 +79,7 @@ void translate_test(void) {
 int main(void)
 {
 	// Branch control over to native ARM assembly space
-	translate_test();
+	translate();
 
 	// Trapping loop to hold system state indefinitely
 	while (1) {
