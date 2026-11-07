@@ -22,6 +22,12 @@
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
+// Table of external methods:
+// compare_LED(void) -> SRAM/Text-based LED comparison example
+// compare_LED2(void) -> Text-based LED comparison with an array (Lab part 1)
+// translation(void) -> Translation of C-Code to assembly code (Lab part 2)
+
+
 extern void compare_LED2(void);
 
 int main(void)
